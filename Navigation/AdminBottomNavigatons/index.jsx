@@ -8,6 +8,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../../src/Modules/Admin/Home';
 import Staff from '../../src/Modules/Admin/Home/Screens/Staff';
 import Client from '../../src/Modules/Admin/Client';
+import Events from '../../src/Modules/Admin/Event';
+import Profile from '../../src/Modules/Admin/Profile';
+import AddedEvent from '../../src/Modules/Admin/Event/Screens/AddedEvent';
+import ClientPriceManagement from '../../src/Modules/Admin/ClientPriceManagement';
+import CrewManagePricing from '../../src/Modules/Admin/CrewPriceManagement';
 
 const Tab = createBottomTabNavigator();
 
@@ -108,9 +113,12 @@ const MainBottomNavigation = () => {
         screenOptions={{headerShown: false, tabBarStyle: {display: 'none'}}}>
         <Tab.Screen name='HOME' component={Home} />
         <Tab.Screen name='CLIENT' component={Client} />
-        <Tab.Screen name='EVENT' component={Home} />
-        <Tab.Screen name='PROFILE' component={Home} />
+        <Tab.Screen name='EVENT' component={Events} />
+        <Tab.Screen name='PROFILE' component={Profile} />
         <Tab.Screen name='STAFF' component={Staff} />
+        <Tab.Screen name='ADDED_EVENT' component={AddedEvent} />
+        <Tab.Screen name='CLIENT_PRICE_MANAGEMENT' component={ClientPriceManagement} />
+        <Tab.Screen name='CREW_PRICE_MANAGEMENT' component={CrewManagePricing} />
       </Tab.Navigator>
    </>
   );

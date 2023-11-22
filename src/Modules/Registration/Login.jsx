@@ -6,16 +6,21 @@ import {
   Dimensions,
   Image,
   TextInput,
+  StatusBar,
 } from 'react-native';
 import React from 'react';
 import Button from '../../Components/Buttons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Color} from '../../../Constant/Color';
+import {useNavigation} from "@react-navigation/native"
 
 const {width, height} = Dimensions.get('window');
 
 const Login = () => {
+  const navigation = useNavigation()
   return (
+    <>
+     <StatusBar barStyle = "dark-content" hidden = {true}/>
     <ImageBackground
       source={require('../../../assest/images/loginbackground.png')}
       resizeMode="cover"
@@ -85,13 +90,14 @@ const Login = () => {
 								placeholder='Enter Your Password'
               />
 							<View style={{width:"100%",marginTop:10}}>
-							<Button text="Continue With Email"/>
+							<Button text="Continue With Email" onPress={()=>navigation.replace("ADMIN")}/>
 							</View>
             </View>
           </View>
         </View>
       </ScrollView>
     </ImageBackground>
+    </>
   );
 };
 

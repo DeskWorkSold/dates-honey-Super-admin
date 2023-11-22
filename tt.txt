@@ -1,0 +1,270 @@
+({!TicketModaldata?.length == 0 ? (
+              <View>
+                {TicketModaldata.map((item, index) => {
+                  var isoDate;
+                  var currentTime;
+                  var givenDateTime;
+                  var remainingTime;
+                  var remainingHours;
+                  var remainingMinutes;
+                  var remainingSeconds;
+                  var hoursLeft;
+                  if (item?.discountendDate && item?.discountendTime) {
+                    const [month, day, year] =
+                      item?.discountendDate?.split("/");
+                    const [time, period] = item?.discountendTime?.split(/:| /);
+                    isoDate = new Date(
+                      `${year}-${month}-${day}T${
+                        period.toLowerCase() === "pm"
+                          ? parseInt(time, 10) + 12
+                          : time
+                      }:00:00Z`
+                    ).toISOString();
+                    currentTime = new Date();
+                    givenDateTime = new Date(isoDate);
+                    remainingTime = givenDateTime - currentTime;
+                    remainingHours = Math?.floor(
+                      remainingTime / (1000 * 60 * 60)
+                    );
+                    remainingMinutes = Math?.floor(
+                      (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+                    );
+                    remainingSeconds = Math?.floor(
+                      (remainingTime % (1000 * 60)) / 1000
+                    );
+                    hoursLeft =
+                      remainingHours +
+                      ":" +
+                      remainingMinutes +
+                      ":" +
+                      remainingSeconds;
+                    if (remainingTime < 0) {
+                      hoursLeft = "0:00:00"; // Set hoursLeft to '0:00:00' if remainingTime is negative
+                    }
+                  }
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      // onPress={() => setTicketindex(index)}
+                      style={{
+                        padding: 20,
+                        backgroundColor: Color.white,
+                        marginHorizontal: 20,
+                        marginTop: 20,
+                        elevation: 4,
+                        // marginBottom: 200,
+                        borderRadius: 20,
+                      }}
+                    >
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <View>
+                          <Text
+                            style={{
+                              color: Color.black,
+                              fontSize: 16,
+                            }}
+                          >
+                            {item?.ticketTitle}
+                          </Text>
+                        </View>
+                        <TouchableOpacity
+                          onPress={() => openEditModal(index, item)}
+                        >
+                          {/* <TouchableOpacity
+                                                    onPress={() => openEditModal(index, item)}
+                                                    style={{
+                                                        backgroundColor: Color.light,
+                                                        alignItems: 'center',
+                                                        width: 20
+                                                    }}>
+                                                    <Image source={require('../../../assets/edit.png')} resizeMode='contain' style={{
+                                                        tintColor: Color.black,
+                                                        width: 15,
+                                                        height: 15,
+                                                    }} />
+                                                </TouchableOpacity> */}
+                          <SVGEdit width={20} height={20} />
+                        </TouchableOpacity>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <View
+                          style={
+                            {
+                              // paddingVertical: 10,
+                            }
+                          }
+                        >
+                          {item?.discountedPrice ? (
+                            <Text
+                              style={{
+                                color: Color.green,
+                                fontWeight: "bold",
+                              }}
+                            >
+                              ${item?.discountedPrice}
+                            </Text>
+                          ) : (
+                            <Text
+                              style={{
+                                color: Color.green,
+                                fontWeight: "bold",
+                              }}
+                            >
+                              ${item?.pricePerTicket}
+                            </Text>
+                          )}
+                        </View>
+                        <TouchableOpacity
+                          onPress={() => navigation.navigate("EventTickets")}
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            paddingHorizontal: 10,
+                            paddingVertical: 5,
+                          }}
+                        >
+                          <Text
+                            style={{
+                              color: Color.black,
+                              fontSize: 12,
+                              marginRight: 5,
+                              textDecorationLine: "line-through",
+                              textDecorationStyle: "solid",
+                            }}
+                          >
+                            ${item?.pricePerTicket}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View>
+                        {moment(item?.discountStartDate, "MM/DD/YYYY").format(
+                          "MMMM D, YYYY"
+                        ) != "Invalid date" &&
+                        moment(item?.discountendDate, "MM/DD/YYYY").format(
+                          "MMMM D, YYYY"
+                        ) != "Invalid date" ? (
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              color: Color.black,
+                            }}
+                          >
+                            Sales start from{" "}
+                            {moment(
+                              item?.discountStartDate,
+                              "MM/DD/YYYY"
+                            ).format("MMMM D, YYYY")}{" "}
+                            to{" "}
+                            {moment(item?.discountendDate, "MM/DD/YYYY").format(
+                              "MMMM D, YYYY"
+                            )}
+                          </Text>
+                        ) : (
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              color: Color.black,
+                            }}
+                          >
+                            Sales not available
+                          </Text>
+                        )}
+                      </View>
+                      <View
+                        style={{
+                          paddingVertical: 2,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontSize: 12,
+                            color: Color.black,
+                          }}
+                        >
+                          Access to enter between {startTime ? startTime : "00"}
+                          –{endTime ? endTime : "00"}.{" "}
+                        </Text>
+                      </View>
+
+                      <View style={{ flexDirection: "row", paddingTop: 10 }}>
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        >
+                          <Image
+                            source={require("../../../assets/left.png")}
+                            resizeMode="contain"
+                            style={{
+                              width: 20,
+                              height: 20,
+                              tintColor: "red",
+                            }}
+                          />
+                          <View>
+                            <Text style={{ fontSize: 12, color: "red" }}>
+                              {item?.totalTickets}Left
+                            </Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            marginLeft: 10,
+                          }}
+                        >
+                          <Text
+                            style={{
+                              color: Color.black,
+                              fontSize: 12,
+                              marginRight: 5,
+                            }}
+                          >
+                            Time Left:
+                          </Text>
+                          <View>
+                            <Text
+                              style={{
+                                fontSize: 12,
+                                color: Color.black,
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {" "}
+                              {hoursLeft ? hoursLeft : "not available"}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            ) : (
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingVertical: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  Add Your Tickets For The Event!
+                </Text>
+              </View>
+            )})

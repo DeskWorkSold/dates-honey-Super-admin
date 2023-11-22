@@ -70,10 +70,10 @@ const Client = () => {
                   }}>
                   <Text
                     style={{
-                      color: Color.mianColor,
-                      fontSize: 16,
-                      fontFamily: 'Poppins-Regular',
-                      fontWeight: '400',
+                      color: tab != 1 ? "rgba(0,0,0,0.6)" : Color.mianColor,
+                      fontSize: 20,
+                      fontFamily: 'SF-Pro-Text-Medium',
+                      fontWeight: '500',
                     }}>
                     Manage
                   </Text>
@@ -92,12 +92,12 @@ const Client = () => {
                   }}>
                   <Text
                     style={{
-                      color: Color.mianColor,
-                      fontSize: 16,
-                      fontFamily: 'Poppins-Regular',
-                      fontWeight: '400',
+                      color: tab != 2 ? "rgba(0,0,0,0.6)" : Color.mianColor,
+                      fontSize: 20,
+                      fontFamily: 'SF-Pro-Text-Medium',
+                      fontWeight: '500',
                     }}>
-                    View Chat
+                     Chat
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -171,12 +171,12 @@ const Client = () => {
                 }}>
                 <Text
                   style={{
-                    color: tab2 != 1 ? Color.mianColor : '#2A3182',
+                    color: tab2 != 1 ? "rgba(0,0,0,0.7)" : '#2A3182',
                     fontSize: 18,
-                    fontWeight: '600',
+                    fontWeight: '500',
                     fontFamily:"Poppins-SemiBold"
                   }}>
-                  Male
+                 {tab==1?"Male":"Last Hour"} 
                 </Text>
               </Pressable>
               <Pressable
@@ -192,12 +192,12 @@ const Client = () => {
                 }}>
                 <Text
                   style={{
-                    color: tab2 != 2 ? Color.mianColor : '#2A3182',
+                    color: tab2 != 2 ? "rgba(0,0,0,0.7)" : '#2A3182',
                     fontSize: 18,
-                    fontWeight: '600',
+                    fontWeight: '500',
                     fontFamily:"Poppins-SemiBold"
                   }}>
-                  Female
+                  {tab==1?"Female":"Today"} 
                 </Text>
               </Pressable>
               <Pressable
@@ -213,19 +213,19 @@ const Client = () => {
                 }}>
                 <Text
                   style={{
-                    color: tab2 != 3 ? Color.mianColor : '#2A3182',
+                    color: tab2 != 3 ? "rgba(0,0,0,0.7)" : '#2A3182',
                     fontSize: 18,
-                    fontWeight: '600',
+                    fontWeight: '500',
                     fontFamily:"Poppins-SemiBold"
                   }}>
-                  Others
+                  {tab==1?"Others":"All"} 
                 </Text>
               </Pressable>
             </View>
-            <View style={{marginTop:30,zIndex:-1}}>
+            <View style={{marginTop:30,zIndex:13}}>
             <Select label="State" />
             </View>
-            <View style={{marginTop:10,zIndex:-1}}>
+            <View style={{marginTop:10,zIndex:12}}>
             <Select label="City" />
             </View>
           </View>

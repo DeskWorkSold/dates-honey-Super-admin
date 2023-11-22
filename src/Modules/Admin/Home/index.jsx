@@ -25,26 +25,49 @@ const Home = () => {
       id: 3,
       text: 'Event',
       isSelected: false,
+      route:"EVENT"
     },
     {
       id: 4,
-      text: 'social media',
+      text: 'Withdraw Request',
       isSelected: false,
+      route:"WITHDRAW_REQUEST"
     },
     {
       id: 5,
       text: 'Clients Pricing',
       isSelected: false,
+      route:"CLIENT_PRICE_MANAGEMENT"
     },
     {
       id: 6,
       text: 'Crew Pricing',
       isSelected: false,
+      route:"CREW_PRICE_MANAGEMENT"
     },
     {
       id: 7,
       text: 'Notifications',
       isSelected: false,
+      route:"NOTIFICATION"
+    },
+    {
+      id: 8,
+      text: 'Posts',
+      isSelected: false,
+      route:"POSTS"
+    },
+    {
+      id: 9,
+      text: 'Article',
+      isSelected: false,
+      route:"ARTICLE"
+    },
+    {
+      id: 10,
+      text: 'Notes',
+      isSelected: false,
+      route:"NOTES"
     },
   ]);
   return (
@@ -67,10 +90,14 @@ const Home = () => {
             }}>
             Admin
           </Text>
+          <TouchableOpacity onPress={()=>{
+            navigation.navigate("NOTIFICATION")
+          }}>
           <Image
             style={{justifyContent: 'flex-end'}}
             source={require('../../../../assest/images/NotificationIcon.png')}
           />
+          </TouchableOpacity>
         </View>
         <View style={{marginTop:50,marginBottom:100}}>
         {MainItems.map(({text, id, isSelected,route}) => {
@@ -89,11 +116,12 @@ const Home = () => {
                   borderWidth: id == Id ? 2 : 0,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  elevation: id != Id ? 2 : 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.9)',
-                  shadowOffset: {width: 0, height: 2.42353},
-                  shadowRadius: 10.09804,
+                  elevation: id != Id ? 4 : 0,
+                  // shadowColor: 'rgba(0, 0, 0, 0.9)',
+                  // shadowOffset: {width: 0, height: 2.42353},
+                  // shadowRadius: 10.09804,
                   marginVertical: 10,
+                  backgroundColor:"white"
                 }}>
                 <Text
                   style={{
